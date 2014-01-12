@@ -1,0 +1,22 @@
+﻿<table class="table table-striped table-condensed table-hover">
+    <thead>
+        <th>Application Code</th>
+        <th>Company Name</th>
+        <th>Industry Sector</th>
+        <th>Contact Name</th>
+        <th>Contact Designation</th>
+        <th>Contact Email</th>     
+        <th>Contact Phone</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in items">
+            <td>{{item.ApplicationCode}}</td>
+            <td>{{item.CompanyName}}</td>
+            <td>{{item.IndustrySector}}</td>
+            <td>{{item.PrimaryContactName}}</td>
+            <td>{{item.PrimaryContactDesignation}}</td>
+            <td>{{item.PrimaryContactEmail}}</td>
+            <td>{{item.PrimaryContactPhone}}</td>
+        </tr>
+    </tbody>
+</table>

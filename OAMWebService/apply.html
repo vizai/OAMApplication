@@ -1,0 +1,74 @@
+﻿<h2>Apply Now</h2>
+
+<form name="form" class="form-horizontal" role="form">
+  <fieldset>
+   <h2><small>About Company</small></h2>
+    <div class="form-group ng-class="{error: form.CompanyName.$invalid}">
+        <label class="col-sm-2 control-label" for="CompanyName">Company Name</label>
+        <div class="col-sm-5">
+            <input type="text"  class="form-control" ng-model="item.CompanyName" id="CompanyName" placeholder="Company/Team Name">
+        </div>
+    </div>
+    <div class="form-group ng-class="{error: form.IndustrySector.$invalid}">
+        <label class="col-sm-2 control-label" for="IndustrySector">IndustrySector</label>
+        <div class="col-sm-5">
+            <input type="text"  class="form-control" ng-model="item.IndustrySector" id="IndustrySector" list="industrysector" placeholder="industry Sector">
+            
+        </div>
+    </div>
+
+        <div class="form-group ng-class="{error: form.CompanyAddress.$invalid}">
+        <label class="col-sm-2 control-label" for="CompanyAddress">Address</label>
+        <div class="col-sm-5">
+            <textarea  class="form-control" ng-model="item.CompanyAddress" id="CompanyAddress" placeholder="Address"/>
+        </div>
+    </div>
+     <div class="form-group ng-class="{error: form.City.$invalid}">
+        <label class="col-sm-2 control-label" for="City">City</label>
+        <div class="col-sm-5">
+            <input type="text"  class="form-control" ng-model="item.City" id="City" placeholder="City">
+        </div>
+    </div>
+    <h2><small>Primary Contact</small></h2>
+     <div class="form-group ng-class="{error: form.PrimaryContactName.$invalid}">
+        <label class="col-sm-2 control-label" for="PrimaryContactName">Name</label>
+        <div class="col-sm-5">
+            <input type="text"  class="form-control" ng-model="item.PrimaryContactName" id="PrimaryContactName" placeholder="Primary Contact Name">
+        </div>
+    </div>
+
+     <div class="form-group ng-class="{error: form.PrimaryContactDesignation.$invalid}">
+        <label class="col-sm-2 control-label" for="PrimaryContactDesignation">Designation</label>
+        <div class="col-sm-5">
+            <input type="text"  class="form-control" ng-model="item.PrimaryContactDesignation" id="PrimaryContactDesignation" placeholder="Primary Contact Designation">
+        </div>
+    </div>
+
+        <div class="form-group ng-class="{error: form.PrimaryContactEmail.$invalid}">
+        <label class="col-sm-2 control-label" for="PrimaryContactEmail">Email</label>
+        <div class="col-sm-5">
+            <input type="email"  class="form-control" ng-model="item.PrimaryContactEmail" placeholder="Primary Contact Email" required="required" id="PrimaryContactEmail">
+        </div>
+    </div>
+
+        <div class="form-group ng-class="{error: form.PrimaryContactPhone.$invalid}">
+        <label class="col-sm-2 control-label" for="PrimaryContactPhone">Phone</label>
+        <div class="col-sm-5">
+            <input type="text"  class="form-control" ng-model="item.PrimaryContactPhone" id="PrimaryContactPhone" placeholder="Primary Contact Phone">
+        </div>
+    </div>  
+     <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                     
+                       <button ng-disabled="myForm.$invalid" ng-click="save()" class="btn btn-primary  btn-sm-10">
+            Submit
+        </button>
+         <button ng-disabled="myForm.$invalid" class="btn btn-danger  btn-sm-10">Cancel</button> 
+                    </div>
+                  </div>
+     </fieldset>
+</form>
+<datalist id="industrysector">
+    <option  data-ng-repeat="industry in IndustrySectors" value="{{industry}}">
+  </datalist>
+

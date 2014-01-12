@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Application Form</title>
+</head>
+<body>
+
+  <div>
+    <h2>All Applications</h2>
+    <ul id="applications" />
+  </div>
+  <div>
+    <h2>Search by ID</h2>
+    <input type="text" id="appId" size="5" />
+    <input type="button" value="Search" onclick="find();" />
+    <p id="application" />
+  </div>
+
+ <div>
+     <form action="/" id="formSubmit">        
+     <div><span style="width:40em">ApplicationCode  :</span><input type="text" id="ApplicationCode" name="ApplicationCode" /> </div>
+     <div><span style="width:40em">BPlanFile        :</span> <input type="text" id="BPlanFile" name="BPlanFile" /> </div>
+     <div><span style="width:40em">Company Address :</span> <input type="text" id="CompanyAddress" name="CompanyAddress" /> </div>
+     <div><span style="width:40em">Company Name        :</span> <input type="text" id="CompanyName" name="CompanyName" /> </div>
+     <div><span style="width:40em">Industry Sector        :</span> <input type="text" id="IndustrySector" name="IndustrySector" /> </div>
+         <div><span style="width:40em">PrimaryContactDesignation  :</span> <input type="text" id="PrimaryContactDesignation" name="PrimaryContactDesignation" /> </div>
+         <div><span style="width:40em">PrimaryContactEmail        : </span><input type="email" id="PrimaryContactEmail" name="PrimaryContactEmail" /> </div>
+         <div><span style="width:40em">PrimaryContactName        : </span><input type="text" id="PrimaryContactName" name="PrimaryContactName" /> </div>
+          <div><span style="width:40em">PrimaryContactPhone        :</span> <input type="text" id="PrimaryContactPhone" name="PrimaryContactPhone" /> </div>
+         <div><span style="width:40em">IPAddress        : </span><input type="text" id="IPAddress" name="IPAddress" /> </div>
+         <div><input type="submit" name="Submit"/></div>
+         </form>
+ </div>
+
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+  <script>
+      var uri = 'api/Applications';
+
+      $("#formSubmit").submit(function (event) {
+
+          // Stop form from submitting normally
+          event.preventDefault();
+
+          // Send the data using post
+          var posting = $.post(uri, {
+              ApplicationCode: document.getElementById("ApplicationCode").value,
+              BPlanFile: document.getElementById("BPlanFile").value,
+              CompanyAddress: document.getElementById("CompanyAddress").value,
+              CompanyName: document.getElementById("CompanyName").value,
+              IndustrySector: document.getElementById("IndustrySector").value,
+              PrimaryContactDesignation: document.getElementById("PrimaryContactDesignation").value,
+              PrimaryContactEmail: document.getElementById("PrimaryContactEmail").value,
+              PrimaryContactName: document.getElementById("PrimaryContactName").value,
+              PrimaryContactPhone: document.getElementById("PrimaryContactPhone").value,
+              IPAddress: document.getElementById("IPAddress").value
+          });
+
+          // Put the results in a div
+          posting.done(function (data) {
+              alert("application submitted successfully");
+          });
+      });
+
+      //code for passing multiple objects
+      //var posting = $.post(uri, {
+      //    ApplicationCode: document.getElementById("ApplicationCode").value,
+      //    BPlanFile: document.getElementById("BPlanFile").value,
+      //    CompanyAddress: document.getElementById("CompanyAddress").value,
+      //    CompanyName: document.getElementById("CompanyName").value,
+      //    IndustrySector: document.getElementById("IndustrySector").value,
+      //    Contacts: [{ ContactName: "as", Email: "as@email.com", Mobile: "124" },
+      //    { ContactName: "as1", Email: "as1@email.com", Mobile: "125" }]
+      //});
+
+      $(document).ready(function () {
+          // Send an AJAX request
+          $.getJSON(uri)
+              .done(function (data) {
+                  // On success, 'data' contains a list of products.
+                  $.each(data, function (key, item) {                      
+                      // Add a list item for the product.
+                      $('<li>Title : ', { text: item.Title }).appendTo($('#applications'));
+                  });
+              });
+      });
+
+      function formatItem(item) {
+          return item.Name + ':' + item.Price;
+      }
+
+      function find() {
+          var id = $('#appId').val();
+          $.getJSON(uri + '/' + id)
+              .done(function (data) {
+                  $('#application').text(data.Title);
+              })
+              .fail(function (jqXHR, textStatus, err) {
+                  $('#application').text('Error: ' + err);
+              });
+      }
+      
+     
+  </script>
+</body>
+</html>
